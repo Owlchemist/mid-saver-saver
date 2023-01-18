@@ -6,10 +6,7 @@
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
-	<description>This mod aims to fix the odd hash collision that may happen when you add a mod mid-save. This works by temporarily disabling compression on definitions. To use this mod, you must:
-		1.) install it *without* adding the problematic new mod.
-		2.) load your save, then immediately save the game and exit.
-		3.) Disable this mod, and enable the mod that was giving your problems. Play as normal. Do not leave this mod enabled.</description>
+	<description>This mod aims to solve various problems related to adding and removing mods mid-save. All fixes are disabled by default and must be reviewed and enabled individually in the mod options.</description>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
