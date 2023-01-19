@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+	<MidSaverSaver.Settings.Label.Adding>Fixes related to adding mods:</MidSaverSaver.Settings.Label.Adding>
+	<MidSaverSaver.Settings.Label.Removing>Fixes related to removing mods:</MidSaverSaver.Settings.Label.Removing>
+	<MidSaverSaver.Settings.Label.Misc>Misc:</MidSaverSaver.Settings.Label.Misc>
+	
 	<MidSaverSaver.Settings.DisableCompression>Fix hash collisions</MidSaverSaver.Settings.DisableCompression>
 	<MidSaverSaver.Settings.DisableCompression.Desc>If you encounter a hash collision after adding a mod, you may notice problems such as:\n\n\n1.) Stone cliffs or chunks have disappeared, or have transformed into a different item.\n\n2.)The deep drill is turning up unusual items.\n\nTo use this fix correctly, you must enable it *before* you add the new mod, then save your game with it enabled. This creates a save without any compression (lossy compression is the source of this problem). Then you can add the mod, and you're free disable this setting or disable this mod entirely.</MidSaverSaver.Settings.DisableCompression.Desc>
 	
 	<MidSaverSaver.Settings.FixCorruptWorldObjects>Fix faction removal</MidSaverSaver.Settings.FixCorruptWorldObjects>
-	<MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>If you remove a faction, you may be unable to view the world map, or load any new saves created after you removed the factions. To use this fix:\n\n\n1.) Enable it and load your save with the faction mod(s) removed. You will get many red errors, but ignore them.\n\n2.) Open the world map, and the console should mention something about corrupt world objects being removed by Mid-Saver Saver.\n\n3.) Save your game.\n\n4.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely.</MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>
+	<MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>If you remove a faction, you may be unable to view the world map, or load any new saves created after you removed the factions. To use this fix:\n\n\n1.) Enable it and load your save with the faction mod(s) removed. You will get many red errors, but ignore them. The console may mention something about corrupt world objects being removed.\n\n2.) Save your game.\n\n3.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely.</MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>
 	
 	<MidSaverSaver.Settings.FixCorruptSectors>Fix corrupt areas and sections</MidSaverSaver.Settings.FixCorruptSectors>
 	<MidSaverSaver.Settings.FixCorruptSectors.Desc>If you remove a mod that had custom coded areas or section layers, it could corrupt the map's managers for these components. When this happens you'll get a "grey screen of death" on loading a save. This fix will regenerate them:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them.\n\n2.) Save your game.\n\n4.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. If your areas were corrupted, you'll need to build these yourself (the home area, roofing areas, snow clear areas, etc).</MidSaverSaver.Settings.FixCorruptSectors.Desc>
+	
+	<MidSaverSaver.Settings.FixCorruptWeather>Fix corrupt weather</MidSaverSaver.Settings.FixCorruptWeather>
+	<MidSaverSaver.Settings.FixCorruptWeather.Desc>If you remove a mod that added custom weather, you may get the "grey screen of death" on load. This fix will reset the weather system:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them.\n\n2.) Save your game.\n\n4.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. Weather will be set to the vanilla "clear" weather def for all corrupted maps.</MidSaverSaver.Settings.FixCorruptWeather.Desc>
+	
+	<MidSaverSaver.Settings.FixCorruptIdeos>Fix corrupt ideologies</MidSaverSaver.Settings.FixCorruptIdeos>
+	<MidSaverSaver.Settings.FixCorruptIdeos.Desc>If you open the ideologies UI and get bombarded by errors while browsing it, this may be due to corrupt precepts. This fix will remove them:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them. The debug console may mention corrupt precepts being removed.\n\n2.) Save your game.\n\n3.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. You may want to edit the ideology to fill in any missing precepts.</MidSaverSaver.Settings.FixCorruptIdeos.Desc>
+	
+	<MidSaverSaver.Settings.DisableErrorSpamControl>Temporarily disable error spam control (DANGEROUS)</MidSaverSaver.Settings.DisableErrorSpamControl>
+	<MidSaverSaver.Settings.DisableErrorSpamControl.Desc>When removing mods, you may need to see more errors than the error spam controller allows. You can use this option to disable this safeguard. This option is not saved, and will reset to normal upon restarting the game.\n\nWARNING: Do not leave the game running if you're being bombarded by errors. Without spam control, your error log's file size will bloat multiple gigabytes.</MidSaverSaver.Settings.DisableErrorSpamControl.Desc>
+	
+	<MidSaverSaver.Alert.MidSaverSaver.Label>Mid-saver Saver active</MidSaverSaver.Alert.MidSaverSaver.Label>
+	<MidSaverSaver.Alert.MidSaverSaver.Desc>One of Mid-saver Saver's fixes are currently active. These fixes are not meant to be passively left enabled while you play the game. Only use them to actively fix problems.</MidSaverSaver.Alert.MidSaverSaver.Desc>
+	
+	<MidSaverSaver.Alert.ErrorSpamControl.Label>Failsafe disabled</MidSaverSaver.Alert.ErrorSpamControl.Label>
+	<MidSaverSaver.Alert.ErrorSpamControl.Desc>Mid-saver has temporarily disabled the error log spam failsafe. Be careful with this, as the log file may rapidly expand in size, potentially depleting all your disk space.</MidSaverSaver.Alert.ErrorSpamControl.Desc>
 </LanguageData>

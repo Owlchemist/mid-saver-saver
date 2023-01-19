@@ -1,9 +1,9 @@
 using Verse;
 using UnityEngine;
 using HarmonyLib;
-using static MidSaverSaver.ModSettings_MidSaverSaver;
+using static MidsaverSaver.ModSettings_MidSaverSaver;
  
-namespace MidSaverSaver
+namespace MidsaverSaver
 {
     public class Mod_MidSaverSaver : Mod
 	{
@@ -17,9 +17,23 @@ namespace MidSaverSaver
 		{
 			Listing_Standard options = new Listing_Standard();
 			options.Begin(inRect);
+			options.Label("MidSaverSaver.Settings.Label.Adding".Translate());
+			options.GapLine();
 			options.CheckboxLabeled("MidSaverSaver.Settings.DisableCompression".Translate(), ref disableCompression, "MidSaverSaver.Settings.DisableCompression.Desc".Translate());
+			options.Gap(); //============================
+			options.Label("MidSaverSaver.Settings.Label.Removing".Translate());
+			options.GapLine();
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptWorldObjects".Translate(), ref fixCorruptWorldObjects, "MidSaverSaver.Settings.FixCorruptWorldObjects.Desc".Translate());
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptSectors".Translate(), ref fixCorruptSectors, "MidSaverSaver.Settings.FixCorruptSectors.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptWeather".Translate(), ref fixCorruptWeather, "MidSaverSaver.Settings.FixCorruptWeather.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptIdeos".Translate(), ref fixCorruptIdeos, "MidSaverSaver.Settings.FixCorruptIdeos.Desc".Translate());
+			if (Prefs.DevMode)
+			{
+				options.Gap(); //============================
+				options.Label("MidSaverSaver.Settings.Label.Misc".Translate());
+				options.GapLine();
+				options.CheckboxLabeled("MidSaverSaver.Settings.DisableErrorSpamControl".Translate(), ref disableErrorSpamControl, "MidSaverSaver.Settings.DisableErrorSpamControl.Desc".Translate());
+			}
 			options.End();
 			base.DoSettingsWindowContents(inRect);
 		}
@@ -39,9 +53,11 @@ namespace MidSaverSaver
 			Scribe_Values.Look<bool>(ref disableCompression, "disableCompression");
 			Scribe_Values.Look<bool>(ref fixCorruptWorldObjects, "fixCorruptWorldObjects");
 			Scribe_Values.Look<bool>(ref fixCorruptSectors, "fixCorruptSectors");
+			Scribe_Values.Look<bool>(ref fixCorruptWeather, "fixCorruptWeather");
+			Scribe_Values.Look<bool>(ref fixCorruptIdeos, "fixCorruptIdeos");
 			base.ExposeData();
 		}
 
-		public static bool disableCompression, fixCorruptWorldObjects, fixCorruptSectors;
+		public static bool disableErrorSpamControl, disableCompression, fixCorruptWorldObjects, fixCorruptSectors, fixCorruptWeather, fixCorruptIdeos;
 	}
 }
