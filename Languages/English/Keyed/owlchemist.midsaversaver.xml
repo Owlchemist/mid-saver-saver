@@ -7,6 +7,9 @@
 	<MidSaverSaver.Settings.DisableCompression>Fix hash collisions</MidSaverSaver.Settings.DisableCompression>
 	<MidSaverSaver.Settings.DisableCompression.Desc>If you encounter a hash collision after adding a mod, you may notice problems such as:\n\n\n1.) Stone cliffs or chunks have disappeared, or have transformed into a different item.\n\n2.)The deep drill is turning up unusual items.\n\nTo use this fix correctly, you must enable it *before* you add the new mod, then save your game with it enabled. This creates a save without any compression (lossy compression is the source of this problem). Then you can add the mod, and you're free disable this setting or disable this mod entirely.</MidSaverSaver.Settings.DisableCompression.Desc>
 	
+	<MidSaverSaver.Settings.GenerateMissingMineables>Generate missing mineables</MidSaverSaver.Settings.GenerateMissingMineables>
+	<MidSaverSaver.Settings.GenerateMissingMineables.Desc>If you add a mod that adds new things to mine, such as metal, coal, etc, this patch will retroactively generate them on existing maps. Enable it and then load your save to trigger the patch.\n\nThis setting is not saved and will be turned off next game restart.</MidSaverSaver.Settings.GenerateMissingMineables.Desc>
+	
 	<MidSaverSaver.Settings.FixCorruptWorldObjects>Fix faction removal</MidSaverSaver.Settings.FixCorruptWorldObjects>
 	<MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>If you remove a faction, you may be unable to view the world map, or load any new saves created after you removed the factions. To use this fix:\n\n\n1.) Enable it and load your save with the faction mod(s) removed. You will get many red errors, but ignore them. The console may mention something about corrupt world objects being removed.\n\n2.) Save your game.\n\n3.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely.</MidSaverSaver.Settings.FixCorruptWorldObjects.Desc>
 	
@@ -19,6 +22,9 @@
 	<MidSaverSaver.Settings.FixCorruptIdeos>Fix corrupt ideologies</MidSaverSaver.Settings.FixCorruptIdeos>
 	<MidSaverSaver.Settings.FixCorruptIdeos.Desc>If you open the ideologies UI and get bombarded by errors while browsing it, this may be due to corrupt precepts. This fix will remove them:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them. The debug console may mention corrupt precepts being removed.\n\n2.) Save your game.\n\n3.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. You may want to edit the ideology to fill in any missing precepts.</MidSaverSaver.Settings.FixCorruptIdeos.Desc>
 	
+	<MidSaverSaver.Settings.FixMissingStuff>Fix missing stuff materials</MidSaverSaver.Settings.FixMissingStuff>
+	<MidSaverSaver.Settings.FixMissingStuff.Desc>If you remove a mod that added "stuff" (materials that buildings and items are built out of, like steel and wood), anything that used those materials will load in a quirked state. This fix will check for this and give them a fallback material based on commonality:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them. The debug console may mention that things with missing materials were fixed.\n\n2.) Disable this patch once done.</MidSaverSaver.Settings.FixMissingStuff.Desc>
+	
 	<MidSaverSaver.Settings.DisableErrorSpamControl>Temporarily disable error spam control (DANGEROUS)</MidSaverSaver.Settings.DisableErrorSpamControl>
 	<MidSaverSaver.Settings.DisableErrorSpamControl.Desc>When removing mods, you may need to see more errors than the error spam controller allows. You can use this option to disable this safeguard. This option is not saved, and will reset to normal upon restarting the game.\n\nWARNING: Do not leave the game running if you're being bombarded by errors. Without spam control, your error log's file size will bloat multiple gigabytes.</MidSaverSaver.Settings.DisableErrorSpamControl.Desc>
 	
@@ -27,4 +33,17 @@
 	
 	<MidSaverSaver.Alert.ErrorSpamControl.Label>Failsafe disabled</MidSaverSaver.Alert.ErrorSpamControl.Label>
 	<MidSaverSaver.Alert.ErrorSpamControl.Desc>Mid-saver has temporarily disabled the error log spam failsafe. Be careful with this, as the log file may rapidly expand in size, potentially depleting all your disk space.</MidSaverSaver.Alert.ErrorSpamControl.Desc>
+	
+	<MidSaverSaver.Map>map</MidSaverSaver.Map>
+	<MidSaverSaver.GenerateMineable.Header>Generate missing mineable</MidSaverSaver.GenerateMineable.Header>
+	<MidSaverSaver.GenerateMineable>No {0} was detected on the map "{1}". Would you like to retroactively generate it?\n\nNote regarding balanced gameplay: Due to pre-existing mineable clumps, the quantity generated here will not perfectly match what would have generated on a fresh map. Each time you add new clumps, the accuracy will degrade on future retroactive generations. Thereby, if you're planning on adding new mineable content, do so as few times as possible.\n\nWarning: The map will need to be refogged once this is complete.</MidSaverSaver.GenerateMineable>
+	<MidSaverSaver.GenerateMineable.Confirm>Generate</MidSaverSaver.GenerateMineable.Confirm>
+	<MidSaverSaver.GenerateMineable.Skip>Skip</MidSaverSaver.GenerateMineable.Skip>
+	
+	<MidSaverSaver.Settings.RemapBodyDefs>Fix body mapping</MidSaverSaver.Settings.RemapBodyDefs>
+	<MidSaverSaver.Settings.RemapBodyDefs.Desc>If you install a mod that modifies the number of body parts (like adding a tail, new limbs, etc), this can cause pre-existing prosthetics and other hediffs to jumble into the wrong body parts, like a nose implant suddenly being on the ear slot. To use this fix:\n\n\n1.) Enable it and save your game *before* adding the new mod. This will record how the bodies used to look.\n\n3.) Cancel any pending medical operations that target body parts.\n\n3.) Enable the mod and load your save.\n\n4.) Save your game, and disable this patch.</MidSaverSaver.Settings.RemapBodyDefs.Desc>
+	
+	<MidSaverSaver.BodyMap.Header>Mid-saver Saver: Fix body mapping</MidSaverSaver.BodyMap.Header>
+	<MidSaverSaver.BodyMapSaved>{0} body defs recorded. You should cancel any pending operations that target a body part, then save the game. After that, close the game and load in the new mod.</MidSaverSaver.BodyMapSaved>
+	<MidSaverSaver.BodyMapWritten>{0} body part hediffs for all pawns and animals throughout the world have been remapped. You will need to save and then reload that save to complete the process (some pawn's health won't look right until things reset on the reload).</MidSaverSaver.BodyMapWritten>
 </LanguageData>

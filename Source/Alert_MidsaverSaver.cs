@@ -21,7 +21,7 @@ namespace MidsaverSaver
 
 		public override AlertReport GetReport()
 		{
-			if (fixCorruptIdeos || fixCorruptSectors || fixCorruptWeather || fixCorruptWorldObjects)
+			if (fixCorruptIdeos || fixCorruptSectors || fixCorruptWeather || fixCorruptWorldObjects || fixMissingStuff)
 			{
 				return new AlertReport  {active = true };
 			}

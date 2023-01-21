@@ -20,6 +20,8 @@ namespace MidsaverSaver
 			options.Label("MidSaverSaver.Settings.Label.Adding".Translate());
 			options.GapLine();
 			options.CheckboxLabeled("MidSaverSaver.Settings.DisableCompression".Translate(), ref disableCompression, "MidSaverSaver.Settings.DisableCompression.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.GenerateMissingMineables".Translate(), ref generateMissingMineables, "MidSaverSaver.Settings.GenerateMissingMineables.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.RemapBodyDefs".Translate(), ref remapBodyDefs, "MidSaverSaver.Settings.RemapBodyDefs.Desc".Translate());
 			options.Gap(); //============================
 			options.Label("MidSaverSaver.Settings.Label.Removing".Translate());
 			options.GapLine();
@@ -27,6 +29,7 @@ namespace MidsaverSaver
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptSectors".Translate(), ref fixCorruptSectors, "MidSaverSaver.Settings.FixCorruptSectors.Desc".Translate());
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptWeather".Translate(), ref fixCorruptWeather, "MidSaverSaver.Settings.FixCorruptWeather.Desc".Translate());
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptIdeos".Translate(), ref fixCorruptIdeos, "MidSaverSaver.Settings.FixCorruptIdeos.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.FixMissingStuff".Translate(), ref fixMissingStuff, "MidSaverSaver.Settings.FixMissingStuff.Desc".Translate());
 			if (Prefs.DevMode)
 			{
 				options.Gap(); //============================
@@ -55,9 +58,12 @@ namespace MidsaverSaver
 			Scribe_Values.Look<bool>(ref fixCorruptSectors, "fixCorruptSectors");
 			Scribe_Values.Look<bool>(ref fixCorruptWeather, "fixCorruptWeather");
 			Scribe_Values.Look<bool>(ref fixCorruptIdeos, "fixCorruptIdeos");
+			Scribe_Values.Look<bool>(ref fixMissingStuff, "fixMissingStuff");
+			Scribe_Values.Look<bool>(ref remapBodyDefs, "remapBodyDefs");
 			base.ExposeData();
 		}
 
-		public static bool disableErrorSpamControl, disableCompression, fixCorruptWorldObjects, fixCorruptSectors, fixCorruptWeather, fixCorruptIdeos;
+		public static bool disableErrorSpamControl, disableCompression, fixCorruptWorldObjects, fixCorruptSectors, fixCorruptWeather, fixCorruptIdeos, 
+			fixMissingStuff, generateMissingMineables, remapBodyDefs;
 	}
 }

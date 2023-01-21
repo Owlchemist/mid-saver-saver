@@ -2,9 +2,8 @@ using HarmonyLib;
 using Verse;
 using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using RimWorld.Planet;
 using static MidsaverSaver.ModSettings_MidSaverSaver;
+using static MidsaverSaver.MidSaverSaverUtility;
  
 namespace MidsaverSaver
 {
@@ -24,13 +23,14 @@ namespace MidsaverSaver
     {
         static void Prefix()
         {
-            var report = new List<string>();
+            List<string> report = new List<string>();
             if (disableCompression) report.Add(nameof(disableCompression));
             if (fixCorruptIdeos) report.Add(nameof(fixCorruptIdeos));
             if (fixCorruptWorldObjects) report.Add(nameof(fixCorruptWorldObjects));
             if (fixCorruptSectors) report.Add(nameof(fixCorruptSectors));
             if (fixCorruptWeather) report.Add(nameof(fixCorruptWeather));
-            Log.Message("[Mid-saver Saver] Loading game and attemting the following fixes (note: do not run fixes unless they are needed):\n" + string.Join("\n - ", report));
+            if (generateMissingMineables) report.Add(nameof(generateMissingMineables));
+            if (report.Count > 0) Log.Message("[Mid-saver Saver] Loading game and attemting the following fixes (note: do not run fixes unless they are needed):\n - " + string.Join("\n - ", report));
         }
     }
 
@@ -40,123 +40,26 @@ namespace MidsaverSaver
     {
         static void Postfix()
         {
-            if (disableCompression) DisableCompression();
-            if (fixCorruptIdeos) CheckIdeos();
-            if (fixCorruptWorldObjects) CheckWorldObjects();
-            if (fixCorruptSectors) CheckAreas();
-            if (fixCorruptWeather) CheckWeather();
-        }
+            try { if (disableCompression) DisableCompression();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(DisableCompression)); }
+            
+            try { if (fixCorruptIdeos) CheckIdeos();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckIdeos)); }
 
-        static void DisableCompression()
-        {
-            foreach (ThingDef thingDef in DefDatabase<ThingDef>.AllDefs)
-            {
-                thingDef.saveCompressible = false;
-            }
-        }
-        
-        //Check for world objects with corrupt faction instances
-        static void CheckWorldObjects()
-        {
-            List<WorldObject> worldObjects = Find.WorldObjects.AllWorldObjects;
-            if (worldObjects == null)
-            {
-                Log.Message("[Mid-saver Saver] worldObjects list is null, skipping...");
-                return;
-            }
-            int count = 0;
-            foreach (var item in worldObjects.ToList())
-            {
-                if (item.factionInt != null && item.factionInt.def == null) 
-                {
-                    count++;
-                    item.Destroy();
-                    worldObjects.Remove(item);
-                }
-            }
-            if (count > 0)
-            {
-                Log.Message("[Mid-saver Saver] removed " + count.ToString() + " corrupt World Objects.");
-            }
-            return;
-        }
+            try { if (fixCorruptWorldObjects) CheckWorldObjects();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckWorldObjects)); }
 
-        //Check for precepts that reference null defs
-        static void CheckIdeos()
-        {
-            int count = 0;
-            //Check corrupt apparel precepts
-            foreach (var ideo in Find.IdeoManager.ideos.ToList())
-            {
-                foreach (var precept in ideo.precepts.ToList())
-                {
-                    if (precept is Precept_Apparel precept_Apparel && precept_Apparel.apparelDef == null)
-                    {
-                        count++;
-                        ideo.RemovePrecept(precept);
-                    }
-                }
-            }
-            //Second pass to handle roles
-            foreach (var ideo in Find.IdeoManager.ideos.ToList())
-            {
-                foreach (var precept in ideo.precepts.ToList())
-                {
-                    if (precept is Precept_Role precept_Role)
-                    {
-                        try
-                        {
-                            var strings = precept_Role.AllApparelRequirementLabels(Gender.Male);
-                        }
-                        catch (System.Exception)
-                        {
-                            count++;
-                            ideo.RemovePrecept(precept);
-                        }
-                    }
-                }
-            }
-            if (count > 0)
-            {
-                Log.Message("[Mid-saver Saver] removed " + count.ToString() + " corrupt precepts across all factions' ideologies.");
-            }
-        }
+            try { if (fixCorruptSectors) CheckAreas();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckAreas)); }
 
-        static void CheckAreas()
-        {
-            int count = 0;
-            foreach (var map in Find.Maps)
-            {
-                if (map.areaManager == null)
-                {
-                    count++;
-                    map.areaManager = new AreaManager(map);
-                    map.areaManager.AddStartingAreas();
-                }
-            }
-            if (count > 0)
-            {
-                Log.Message("[Mid-saver Saver] found " + count.ToString() + " maps with corrupt area managers. Regenerating... You will need to rebuild your areas manually (home area, roof areas, etc)");
-            }
-        }
-    
-        static void CheckWeather()
-        {
-            int count = 0;
-            foreach (var map in Find.Maps)
-            {
-                if (map.weatherManager.curWeather == null)
-                {
-                    count++;
-                    map.weatherManager.curWeather = WeatherDefOf.Clear;
-                    map.weatherManager.lastWeather = WeatherDefOf.Clear;
-                    map.weatherManager.curWeatherAge = 0;
-                }
-            }
-            if (count > 0)
-            {
-                Log.Message("[Mid-saver Saver] detected " + count.ToString() + " maps with corrupt weather managers. Resetting...");
-            }
+            try { if (fixCorruptWeather) CheckWeather();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckWeather)); }
+
+            try { if (fixMissingStuff) CheckNullStuff();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckNullStuff)); }
+
+            try { if (generateMissingMineables) CheckMissingMineables();}
+            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckMissingMineables)); }
         }
     }
 
@@ -167,12 +70,27 @@ namespace MidsaverSaver
     {
         static void Prefix(MapDrawer __instance)
         {
-            if (!fixCorruptSectors) return;
-            if (__instance.sections == null)
-            {
-                Log.Message("[Mid-saver Saver] detected missing map sections. Regenerating...");
-                __instance.RegenerateEverythingNow();
-            }
+            if (fixCorruptSectors) CheckSectors(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(GenStep_ScatterLumpsMineable), nameof(GenStep_ScatterLumpsMineable.ChooseThingDef))]
+    public static class Patch_GenStep_ScatterLumpsMineable
+    {
+        public static bool overRideScatterActive;
+        public static Dictionary<Map, List<ThingDef>> mineableDefsQueue;
+        public static List<ThingDef> mineableDefs;
+        static bool Prefix(ref ThingDef __result)
+        {
+            if (!overRideScatterActive) return true;
+
+            __result = mineableDefs.RandomElementByWeightWithFallback(delegate(ThingDef d)
+			{
+				if (d.building == null) return 0f;
+				if (d.building.mineableThing != null && d.building.mineableThing.BaseMarketValue > float.MaxValue) return 0f;
+				return d.building.mineableScatterCommonality;
+			}, null);
+            return false;
         }
     }
 }
