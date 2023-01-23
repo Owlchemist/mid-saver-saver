@@ -10,6 +10,12 @@ namespace MidsaverSaver
 {
     public static class MidSaverSaverUtility
     {
+        static Dialog_MessageBox reloadNow;
+        public static void PromptToReload()
+        {
+            if (reloadNow == null) reloadNow = new Dialog_MessageBox(text: "MidSaverSaver.ReloadNow".Translate(), title: "MidSaverSaver.ReloadNow.Header".Translate() );
+			if (!Find.WindowStack.IsOpen(reloadNow)) Find.WindowStack.Add(reloadNow);
+        }
 		public static void DisableCompression()
         {
             foreach (ThingDef thingDef in DefDatabase<ThingDef>.AllDefs)
@@ -34,10 +40,31 @@ namespace MidsaverSaver
                     item.Destroy();
                     worldObjects.Remove(item);
                 }
+                else if (item is Settlement settlement)
+                {
+                    bool isBad = false;
+                    try
+                    {
+                        var materialTest = settlement.Material;
+                        isBad = materialTest == null;
+                    }
+                    catch (System.Exception)
+                    {
+                        isBad = true;
+                    }
+
+                    if (isBad && item.factionInt == null)
+                    {
+                        count++;
+                        item.Destroy();
+                        worldObjects.Remove(item);
+                    }
+                }
             }
             if (count > 0)
             {
                 Log.Message("[Mid-saver Saver] removed " + count.ToString() + " corrupt World Objects.");
+                PromptToReload();
             }
             return;
         }
@@ -78,6 +105,7 @@ namespace MidsaverSaver
             if (count > 0)
             {
                 Log.Message("[Mid-saver Saver] removed " + count.ToString() + " corrupt precepts across all factions' ideologies.");
+                PromptToReload();
             }
         }
         public static void CheckAreas()
@@ -95,6 +123,7 @@ namespace MidsaverSaver
             if (count > 0)
             {
                 Log.Message("[Mid-saver Saver] found " + count.ToString() + " maps with corrupt area managers. Regenerating... You will need to rebuild your areas manually (home area, roof areas, etc)");
+                PromptToReload();
             }
         } 
         public static void CheckWeather()
@@ -113,6 +142,7 @@ namespace MidsaverSaver
             if (count > 0)
             {
                 Log.Message("[Mid-saver Saver] detected " + count.ToString() + " maps with corrupt weather managers. Resetting...");
+                PromptToReload();
             }
         }
 		public static void CheckSectors(MapDrawer __instance)
@@ -121,6 +151,7 @@ namespace MidsaverSaver
             {
                 Log.Message("[Mid-saver Saver] detected missing map sections. Regenerating...");
                 __instance.RegenerateEverythingNow();
+                PromptToReload();
             }
 		}
 		public static void CheckNullStuff()
@@ -158,6 +189,7 @@ namespace MidsaverSaver
 				if (count > 0)
 				{
 					Log.Message("[Mid-saver Saver] detected " + count.ToString() + " things made a stuff material that no longer exists. Picking a new material...");
+                    PromptToReload();
 				}
 			}
 

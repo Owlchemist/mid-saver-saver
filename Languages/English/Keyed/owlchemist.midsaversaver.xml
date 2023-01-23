@@ -4,6 +4,9 @@
 	<MidSaverSaver.Settings.Label.Removing>Fixes related to removing mods:</MidSaverSaver.Settings.Label.Removing>
 	<MidSaverSaver.Settings.Label.Misc>Misc:</MidSaverSaver.Settings.Label.Misc>
 	
+	<MidSaverSaver.ReloadNow>At least one fix needed to run (check the debug console for details). In order for the fixes to propagate, save your game now, and then load that save. You do not need to restart the whole game.</MidSaverSaver.ReloadNow>
+	<MidSaverSaver.ReloadNow.Header>Mid-saver Saver: Reload needed</MidSaverSaver.ReloadNow.Header>
+	
 	<MidSaverSaver.Settings.DisableCompression>Fix hash collisions</MidSaverSaver.Settings.DisableCompression>
 	<MidSaverSaver.Settings.DisableCompression.Desc>If you encounter a hash collision after adding a mod, you may notice problems such as:\n\n\n1.) Stone cliffs or chunks have disappeared, or have transformed into a different item.\n\n2.)The deep drill is turning up unusual items.\n\nTo use this fix correctly, you must enable it *before* you add the new mod, then save your game with it enabled. This creates a save without any compression (lossy compression is the source of this problem). Then you can add the mod, and you're free disable this setting or disable this mod entirely.</MidSaverSaver.Settings.DisableCompression.Desc>
 	
@@ -35,7 +38,7 @@
 	<MidSaverSaver.Alert.ErrorSpamControl.Desc>Mid-saver has temporarily disabled the error log spam failsafe. Be careful with this, as the log file may rapidly expand in size, potentially depleting all your disk space.</MidSaverSaver.Alert.ErrorSpamControl.Desc>
 	
 	<MidSaverSaver.Map>map</MidSaverSaver.Map>
-	<MidSaverSaver.GenerateMineable.Header>Generate missing mineable</MidSaverSaver.GenerateMineable.Header>
+	<MidSaverSaver.GenerateMineable.Header>Mid-saver Saver: Generate missing mineable</MidSaverSaver.GenerateMineable.Header>
 	<MidSaverSaver.GenerateMineable>No {0} was detected on the map "{1}". Would you like to retroactively generate it?\n\nNote regarding balanced gameplay: Due to pre-existing mineable clumps, the quantity generated here will not perfectly match what would have generated on a fresh map. Each time you add new clumps, the accuracy will degrade on future retroactive generations. Thereby, if you're planning on adding new mineable content, do so as few times as possible.\n\nWarning: The map will need to be refogged once this is complete.</MidSaverSaver.GenerateMineable>
 	<MidSaverSaver.GenerateMineable.Confirm>Generate</MidSaverSaver.GenerateMineable.Confirm>
 	<MidSaverSaver.GenerateMineable.Skip>Skip</MidSaverSaver.GenerateMineable.Skip>

@@ -43,23 +43,35 @@ namespace MidsaverSaver
             try { if (disableCompression) DisableCompression();}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(DisableCompression)); }
             
-            try { if (fixCorruptIdeos) CheckIdeos();}
+            try { if (fixCorruptIdeos) CheckIdeos(); fixCorruptIdeos = false;}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckIdeos)); }
-
-            try { if (fixCorruptWorldObjects) CheckWorldObjects();}
-            catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckWorldObjects)); }
 
             try { if (fixCorruptSectors) CheckAreas();}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckAreas)); }
 
-            try { if (fixCorruptWeather) CheckWeather();}
+            try { if (fixCorruptWeather) CheckWeather(); fixCorruptWeather = false;}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckWeather)); }
 
-            try { if (fixMissingStuff) CheckNullStuff();}
+            try { if (fixMissingStuff) CheckNullStuff(); fixMissingStuff = false;}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckNullStuff)); }
 
             try { if (generateMissingMineables) CheckMissingMineables();}
             catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckMissingMineables)); }
+        }
+    }
+
+    //Check for missing sections
+    [HarmonyPatch(typeof(TickManager), nameof(TickManager.DoSingleTick))]
+    [HarmonyPriority(Priority.First)]
+    public static class CheckWorldObjects
+    {
+        static void Postfix()
+        {
+            if (fixCorruptWorldObjects)
+            {
+                try { CheckWorldObjects(); fixCorruptWorldObjects = false;}
+                catch (System.Exception) { Log.Error("[Mid-saver Saver] failed to run " + nameof(CheckWorldObjects)); }
+            }
         }
     }
 

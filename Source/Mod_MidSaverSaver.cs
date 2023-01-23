@@ -63,7 +63,14 @@ namespace MidsaverSaver
 			base.ExposeData();
 		}
 
-		public static bool disableErrorSpamControl, disableCompression, fixCorruptWorldObjects, fixCorruptSectors, fixCorruptWeather, fixCorruptIdeos, 
-			fixMissingStuff, generateMissingMineables, remapBodyDefs;
+		public static bool disableErrorSpamControl, 
+			disableCompression, 
+			fixCorruptWorldObjects, 
+			fixCorruptSectors, 
+			fixCorruptWeather,
+			fixCorruptIdeos, 
+			fixMissingStuff, 
+			generateMissingMineables, 
+			remapBodyDefs;
 	}
 }
