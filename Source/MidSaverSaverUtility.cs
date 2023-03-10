@@ -23,6 +23,7 @@ namespace MidsaverSaver
                 thingDef.saveCompressible = false;
             }
         }
+        
         public static void CheckWorldObjects()
         {
             List<WorldObject> worldObjects = Find.WorldObjects.AllWorldObjects;
@@ -32,12 +33,12 @@ namespace MidsaverSaver
                 return;
             }
             int count = 0;
-            foreach (var item in worldObjects.ToList())
+            for (int i = worldObjects.Count; i-- > 0;)
             {
+                var item = worldObjects[i];
                 if (item.factionInt != null && item.factionInt.def == null) 
                 {
                     count++;
-                    item.Destroy();
                     worldObjects.Remove(item);
                 }
                 else if (item is Settlement settlement)
@@ -71,23 +72,24 @@ namespace MidsaverSaver
         public static void CheckIdeos()
         {
             int count = 0;
-            //Check corrupt apparel precepts
+
             foreach (var ideo in Find.IdeoManager.ideos.ToList())
             {
                 foreach (var precept in ideo.precepts.ToList())
                 {
+                    //Check corrupt apparel precepts
                     if (precept is Precept_Apparel precept_Apparel && precept_Apparel.apparelDef == null)
                     {
                         count++;
                         ideo.RemovePrecept(precept);
                     }
-                }
-            }
-            //Second pass to handle roles
-            foreach (var ideo in Find.IdeoManager.ideos.ToList())
-            {
-                foreach (var precept in ideo.precepts.ToList())
-                {
+                    //Remove broken rituals
+                    if (precept is Precept_Ritual precept_Ritual && precept_Ritual.outcomeEffect != null && precept_Ritual.outcomeEffect.def == null)
+                    {
+                        count++;
+                        ideo.RemovePrecept(precept);
+                    }
+                    //Remove broken roles
                     if (precept is Precept_Role precept_Role)
                     {
                         try
@@ -319,6 +321,24 @@ namespace MidsaverSaver
                     Patch_GenStep_ScatterLumpsMineable.overRideScatterActive = false;
                 }
             }
+        }
+        public static void CheckMisc()
+        {
+            //Looks for other fixes
+            if (Patch_GameConditionManager_ExposeData.count > 0) {
+                Log.Message("[Mid-saver Saver] found " + Patch_GameConditionManager_ExposeData.count.ToString() + " maps with corrupt game conditions. Removing...");
+                PromptToReload();
+            }
+
+            if (Patch_ExposeThingFilter.count > 0) Log.Message("[Mid-saver Saver] found " + Patch_ExposeThingFilter.count.ToString() + " corrupt item filters. Cleaning...");
+            /*
+            if (Patch_BestKindLabel.count > 0) 
+            {
+                Log.Message("[Mid-saver Saver] found " + Patch_BestKindLabel.count.ToString() + 
+                " pawns of a removed kind. Switching them to a fallback def... of those, " + Patch_BestKindLabel.destroyed.ToString() + " could not find a fallback and were despawned.");
+                PromptToReload();
+            }
+            */
         }
     }
 }

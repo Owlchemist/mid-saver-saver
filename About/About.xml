@@ -6,6 +6,7 @@
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
+	<modVersion>1.10.1</modVersion>
 	<description>This mod aims to solve various problems related to adding and removing mods mid-save. All fixes are disabled by default and must be reviewed and enabled individually in the mod options.</description>
 	<modDependencies>
 		<li>

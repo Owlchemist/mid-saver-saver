@@ -30,6 +30,7 @@ namespace MidsaverSaver
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptWeather".Translate(), ref fixCorruptWeather, "MidSaverSaver.Settings.FixCorruptWeather.Desc".Translate());
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixCorruptIdeos".Translate(), ref fixCorruptIdeos, "MidSaverSaver.Settings.FixCorruptIdeos.Desc".Translate());
 			options.CheckboxLabeled("MidSaverSaver.Settings.FixMissingStuff".Translate(), ref fixMissingStuff, "MidSaverSaver.Settings.FixMissingStuff.Desc".Translate());
+			options.CheckboxLabeled("MidSaverSaver.Settings.FixMisc".Translate(), ref fixMisc, "MidSaverSaver.Settings.FixMisc.Desc".Translate());
 			if (Prefs.DevMode)
 			{
 				options.Gap(); //============================
@@ -54,11 +55,6 @@ namespace MidsaverSaver
 		public override void ExposeData()
 		{
 			Scribe_Values.Look<bool>(ref disableCompression, "disableCompression");
-			Scribe_Values.Look<bool>(ref fixCorruptWorldObjects, "fixCorruptWorldObjects");
-			Scribe_Values.Look<bool>(ref fixCorruptSectors, "fixCorruptSectors");
-			Scribe_Values.Look<bool>(ref fixCorruptWeather, "fixCorruptWeather");
-			Scribe_Values.Look<bool>(ref fixCorruptIdeos, "fixCorruptIdeos");
-			Scribe_Values.Look<bool>(ref fixMissingStuff, "fixMissingStuff");
 			Scribe_Values.Look<bool>(ref remapBodyDefs, "remapBodyDefs");
 			base.ExposeData();
 		}
@@ -71,6 +67,7 @@ namespace MidsaverSaver
 			fixCorruptIdeos, 
 			fixMissingStuff, 
 			generateMissingMineables, 
-			remapBodyDefs;
+			remapBodyDefs,
+			fixMisc;
 	}
 }

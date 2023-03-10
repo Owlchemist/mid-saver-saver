@@ -22,6 +22,9 @@
 	<MidSaverSaver.Settings.FixCorruptWeather>Fix corrupt weather</MidSaverSaver.Settings.FixCorruptWeather>
 	<MidSaverSaver.Settings.FixCorruptWeather.Desc>If you remove a mod that added custom weather, you may get the "grey screen of death" on load. This fix will reset the weather system:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them.\n\n2.) Save your game.\n\n4.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. Weather will be set to the vanilla "clear" weather def for all corrupted maps.</MidSaverSaver.Settings.FixCorruptWeather.Desc>
 	
+	<MidSaverSaver.Settings.FixMisc>Fix less common issues</MidSaverSaver.Settings.FixMisc>
+	<MidSaverSaver.Settings.FixMisc.Desc>A collection of misc fixes for less common niche issues.</MidSaverSaver.Settings.FixMisc.Desc>
+	
 	<MidSaverSaver.Settings.FixCorruptIdeos>Fix corrupt ideologies</MidSaverSaver.Settings.FixCorruptIdeos>
 	<MidSaverSaver.Settings.FixCorruptIdeos.Desc>If you open the ideologies UI and get bombarded by errors while browsing it, this may be due to corrupt precepts. This fix will remove them:\n\n\n1.) Enable it and load your save with the mod(s) removed. You will get many red errors, but ignore them. The debug console may mention corrupt precepts being removed.\n\n2.) Save your game.\n\n3.) Check if you can load your save. If you can, you're good to go and should disable this fix, or even the mod entirely. You may want to edit the ideology to fill in any missing precepts.</MidSaverSaver.Settings.FixCorruptIdeos.Desc>
 	
@@ -39,12 +42,12 @@
 	
 	<MidSaverSaver.Map>map</MidSaverSaver.Map>
 	<MidSaverSaver.GenerateMineable.Header>Mid-saver Saver: Generate missing mineable</MidSaverSaver.GenerateMineable.Header>
-	<MidSaverSaver.GenerateMineable>No {0} was detected on the map "{1}". Would you like to retroactively generate it?\n\nNote regarding balanced gameplay: Due to pre-existing mineable clumps, the quantity generated here will not perfectly match what would have generated on a fresh map. Each time you add new clumps, the accuracy will degrade on future retroactive generations. Thereby, if you're planning on adding new mineable content, do so as few times as possible.\n\nWarning: The map will need to be refogged once this is complete.</MidSaverSaver.GenerateMineable>
+	<MidSaverSaver.GenerateMineable>No {0} was detected on the map "{1}". Would you like to retroactively generate it?\n\nNote regarding balanced gameplay: Due to pre-existing mineable clumps, the quantity generated here will not perfectly match what would have generated on a fresh map. Each time you add new clumps, the accuracy will degrade on future retroactive generations. Therefore, if you're planning on adding new mineable content, do so as few times as possible.\n\nWarning: The map will need to be refogged once this is complete.</MidSaverSaver.GenerateMineable>
 	<MidSaverSaver.GenerateMineable.Confirm>Generate</MidSaverSaver.GenerateMineable.Confirm>
 	<MidSaverSaver.GenerateMineable.Skip>Skip</MidSaverSaver.GenerateMineable.Skip>
 	
 	<MidSaverSaver.Settings.RemapBodyDefs>Fix body mapping</MidSaverSaver.Settings.RemapBodyDefs>
-	<MidSaverSaver.Settings.RemapBodyDefs.Desc>If you install a mod that modifies the number of body parts (like adding a tail, new limbs, etc), this can cause pre-existing prosthetics and other hediffs to jumble into the wrong body parts, like a nose implant suddenly being on the ear slot. To use this fix:\n\n\n1.) Enable it and save your game *before* adding the new mod. This will record how the bodies used to look.\n\n3.) Cancel any pending medical operations that target body parts.\n\n3.) Enable the mod and load your save.\n\n4.) Save your game, and disable this patch.</MidSaverSaver.Settings.RemapBodyDefs.Desc>
+	<MidSaverSaver.Settings.RemapBodyDefs.Desc>If you install a mod that modifies the number of body parts (like adding a tail, new limbs, etc), this can cause pre-existing prosthetics and other hediffs to jumble into the wrong body parts, like a nose implant suddenly being on the ear slot. To use this fix:\n\n\n1.) Enable it and save your game *before* adding the new mod. This will record how the bodies used to look.\n\n2.) Cancel any pending medical operations that target body parts.\n\n3.) Enable the mod and load your save.\n\n4.) Save your game, and disable this patch.</MidSaverSaver.Settings.RemapBodyDefs.Desc>
 	
 	<MidSaverSaver.BodyMap.Header>Mid-saver Saver: Fix body mapping</MidSaverSaver.BodyMap.Header>
 	<MidSaverSaver.BodyMapSaved>{0} body defs recorded. You should cancel any pending operations that target a body part, then save the game. After that, close the game and load in the new mod.</MidSaverSaver.BodyMapSaved>
